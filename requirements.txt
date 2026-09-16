@@ -1,0 +1,14 @@
+langchain
+langchain-core
+langchain-text-splitters
+langchain-huggingface
+langchain-chroma
+langchain-community
+langchain-classic
+langchain-ollama
+sentence-transformers
+chromadb
+pandas
+rank_bm25
+ragas
+ollama

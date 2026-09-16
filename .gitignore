@@ -1,0 +1,7 @@
+chroma_db/
+data/cuad/
+CUAD_v1/
+__pycache__/
+*.pyc
+.venv/
+venv/
