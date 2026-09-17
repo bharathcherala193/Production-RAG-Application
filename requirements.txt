@@ -3,7 +3,7 @@ langchain-core
 langchain-text-splitters
 langchain-huggingface
 langchain-chroma
-langchain-community
+langchain-community<0.4.2
 langchain-classic
 langchain-ollama
 sentence-transformers
