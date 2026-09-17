@@ -1,3 +1,21 @@
+"""
+generate.py — Citation-enforced answer generation ("Ask My Docs").
+
+This is where retrieval becomes an actual Q&A system. The reranked top-N
+chunks get handed to a local LLM (via Ollama) with a prompt that forces
+two things:
+  1. Answer ONLY using the provided contract excerpts — nothing from the
+     model's own training knowledge.
+  2. Cite which excerpt(s) the answer came from.
+
+Why this matters: without an explicit instruction + structured context,
+LLMs blend in outside knowledge and sound equally confident whether
+they're right or making it up. For a legal-contract system, an answer
+that isn't traceable back to real contract text isn't just unhelpful —
+it's actively risky. This prompt is the whole "citation enforcement"
+piece of the project.
+"""
+
 from langchain_ollama import ChatOllama
 from langchain_core.documents import Document
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -6,14 +24,20 @@ from retrieval import build_hybrid_retriever
 from rerank import rerank, RERANK_MODEL
 from sentence_transformers import CrossEncoder
 
-OLLAMA_MODEL = "llama3.2"
+OLLAMA_MODEL = "llama3.1:8b"
 
 SYSTEM_PROMPT = """You are a contract-analysis assistant. You answer questions using ONLY \
 the contract excerpts provided below — never your own outside knowledge.
 
 Rules:
-- If the answer is found in the excerpts, answer it clearly and cite the excerpt \
-number(s) you used, like [1] or [1][3].
+- Answer the specific question directly and concretely — quote or state the actual \
+clause language, terms, or numbers involved. Never give a vague yes/no answer like \
+"Yes, there is such a clause" without stating what it actually says.
+- Cite the excerpt number(s) you used, like [1] or [1][3].
+- If the excerpts come from more than one unrelated contract, silently use only the \
+excerpt(s) that actually answer the question — do not comment on or list excerpts \
+that don't apply (e.g. never say "[3] does not address this"). Just answer from \
+the relevant one(s) as if the others weren't there.
 - If the excerpts do NOT contain enough information to answer, say exactly: \
 "I couldn't find this in the retrieved contract excerpts." Do not guess or fill \
 gaps with general legal knowledge.
