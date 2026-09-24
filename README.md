@@ -1,6 +1,6 @@
 # Ask My Docs — Production RAG over Legal Contracts
-
-![CI](https://github.com/bharathcherala193/Production-RAG-Application/actions/workflows/ci-eval.yml/badge.svg)
+  [▶ Demo](https://drive.google.com/file/d/1S834Bga_8R2A6KDMbkVFhmZ3A75v7Mlg/view?usp=drive_link)
+![CI](https://github.com/bharathcherala193/Production-RAG-Application/actions/workflows/ci-eval.yml/badge.svg
 
 A domain-specific question-answering system over the [CUAD](https://www.atticusprojectai.org/cuad) legal contracts dataset (510 real commercial contracts), built to demonstrate the full shape of a production RAG pipeline — not just a basic chatbot demo.
 
