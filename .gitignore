@@ -1,7 +1,9 @@
-chroma_db/
-data/cuad/
-CUAD_v1/
 __pycache__/
 *.pyc
 .venv/
-venv/
+*.log
+chroma_db/
+CUAD_v1/
+data/
+claude_desktop_config.json
+.env
