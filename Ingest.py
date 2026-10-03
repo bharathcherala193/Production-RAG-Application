@@ -145,3 +145,4 @@ def sanity_check(vectorstore: Chroma):
 if __name__ == "__main__":
     vectorstore = build_index()
     sanity_check(vectorstore)
+    
