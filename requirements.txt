@@ -12,3 +12,5 @@ pandas
 rank_bm25
 ragas
 ollama
+streamlit
+mcp[cli]>=2,<3
